@@ -1,0 +1,9 @@
+<launch>
+    <!-- openvslam subscribes "camera/left/image_raw" "camera/right/image_raw"  -->
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 camera target_frame" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="link2_broadcaster" args="0 0 0 0 0 0 odom source_frame" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="link3_broadcaster" args="0 0 0 0 0 0 odom camera" />
+
+    <node name="openvslam" pkg="stella_vslam_ros" type="run_slam" args="-v $(find stella_vslam_ros)/config/orb_vocab.fbow -c $(find stella_vslam_ros)/config/NTU_stereo.yaml" />
+</launch>
